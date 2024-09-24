@@ -23,13 +23,15 @@ const Sidebar = () => {
   };
 
   // Close sidebar when clicking outside the sidebar
-  const handleClickOutside = (event: MouseEvent) => {
-    if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node) && isOpen) {
-      setIsOpen(false);
-    }
-  };
+  
 
   useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node) && isOpen) {
+        setIsOpen(false);
+      }
+    };
+  
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
