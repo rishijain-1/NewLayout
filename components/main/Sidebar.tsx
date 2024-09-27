@@ -66,7 +66,7 @@ const Sidebar = () => {
 
           {/* Sections */}
           <nav className="overflow-y-auto max-h-full flex-grow">
-            <ul>
+            <ul className='px-4'>
               <li className="text-sm font-medium text-gray-500 cursor-pointer hover:bg-gray-100 p-1 rounded-md transition-colors">
                 <FaFileAlt className="inline mr-2" /> Drafts
               </li>
@@ -102,7 +102,7 @@ const Sidebar = () => {
                 <FaStar className="mr-2 text-gray-700" /> Favorites
               </h3>
               {expandedSections.favorites && (
-                <ul className="mt-1 p-1">
+                <ul className="mt-1 px-4">
                   <li className="text-sm font-medium text-gray-500 cursor-pointer hover:bg-gray-100 p-1 rounded-md transition-colors">
                     <div className="flex justify-between items-center">
                       <div className="flex items-center">
@@ -134,7 +134,7 @@ const Sidebar = () => {
                 <FaCpanel className="mr-2" /> Channels
               </h3>
               {expandedSections.channels && (
-                <ul className="mt-1 p-2">
+                <ul className="mt-1 px-4">
                   <li className="text-sm font-medium text-gray-500 cursor-pointer hover:bg-gray-100 p-1 rounded-md transition-colors">
                     <div className="flex justify-between items-center">
                       <div className="flex items-center">
@@ -186,7 +186,7 @@ const Sidebar = () => {
                 <FaRegCalendarAlt className="mr-2" /> Others
               </h3>
               {expandedSections.others && (
-                <ul className="mt-1 p-2">
+                <ul className="mt-1 px-4">
                   <li className="text-sm font-medium text-gray-500 cursor-pointer hover:bg-gray-100 p-1 rounded-md transition-colors">
                     Strategy
                   </li>
