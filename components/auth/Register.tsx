@@ -59,7 +59,7 @@ const Register: React.FC = () => {
   };
 
   return (
-      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
+      <div className="w-full max-w-md  p-8 space-y-6 bg-white rounded-lg shadow-md">
         <h2 className="text-2xl font-bold text-center">Register</h2>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           
@@ -145,7 +145,7 @@ const Register: React.FC = () => {
               type="button"
               aria-label={showPassword ? "Hide password" : "Show password"}
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-600"
+              className="absolute right-4 mt-3 text-gray-600"
             >
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </button>
@@ -172,7 +172,7 @@ const Register: React.FC = () => {
               type="button"
               aria-label={showConfirmPassword ? "Hide confirm password" : "Show confirm password"}
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-600"
+              className="absolute right-4 mt-3 text-gray-600"
             >
               {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
             </button>

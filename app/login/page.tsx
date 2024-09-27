@@ -1,5 +1,4 @@
 import Login from '@/components/auth/Login';
-import LogoHeader from '@/components/LogoHeader';
 import React from 'react';
 
 const LoginPage = () => {
