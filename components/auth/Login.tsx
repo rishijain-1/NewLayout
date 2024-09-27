@@ -1,9 +1,10 @@
-'use client'
+'use client';
 import { useForm, SubmitHandler } from "react-hook-form";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaFacebook, FaGoogle } from "react-icons/fa"; // For social icons
 
 interface FormData {
   email: string;
@@ -31,14 +32,12 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-[80vh]">
-      <div className="w-full max-w-md p-8 space-y-6 bg-gray-800 rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-white text-center">Login</h2>
+
+      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
+        <h2 className="text-2xl font-bold text-center">Login</h2>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="relative">
-            <label htmlFor="email" className="flex items-center text-white text-sm font-medium mb-1">
-              Email
-            </label>
+            <label htmlFor="email" className="text-sm font-medium mb-1">Email</label>
             <input
               type="email"
               id="email"
@@ -50,17 +49,15 @@ const Login = () => {
                   message: "Invalid email address",
                 },
               })}
-              className="w-full p-2 rounded-md outline-none text-black"
+              className="w-full p-2 border border-gray-300 rounded-md outline-none"
             />
             {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
           </div>
           <div className="relative">
-            <label htmlFor="password" className="flex items-center text-white text-sm font-medium mb-1">
-              Password
-            </label>
+            <label htmlFor="password" className="text-sm font-medium mb-1">Password</label>
             <div className="flex items-center border-none rounded-md relative">
               <input
-                type={showPassword ? "text" : "password"} // Toggle input type based on state
+                type={showPassword ? "text" : "password"}
                 id="password"
                 placeholder="Password"
                 {...register("password", {
@@ -70,30 +67,54 @@ const Login = () => {
                     message: "Password must be at least 6 characters",
                   },
                 })}
-                className="w-full p-2 rounded-md outline-none text-black"
+                className="w-full p-2 border border-gray-300 rounded-md outline-none"
               />
               <button
                 type="button"
-                onClick={() => setShowPassword(!showPassword)} // Toggle password visibility
-                className="absolute right-4 text-black"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-4 text-gray-600"
               >
-                {showPassword ? <FaEyeSlash /> : <FaEye />} {/* Toggle icon */}
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
             </div>
             {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
           </div>
           {error && <p className="text-red-500 text-sm">{error}</p>}
-          <div>
-            <button
-              type="submit"
-              className="w-full px-4 py-2 font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Sign In
-            </button>
+          <div className="flex justify-end">
+            <a href="/forgot-password" className="text-sm text-blue-600 hover:underline">Forgot password?</a>
           </div>
+          <button
+            type="submit"
+            className="w-full px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
+          >
+            Login
+          </button>
         </form>
+        <div className="text-center text-sm text-gray-600">
+          Don’t have an account? <a href="/" className="text-blue-600 hover:underline">Signup</a>
+        </div>
+        <div className="flex items-center justify-center mt-4">
+          <div className="border-t w-full border-gray-300"></div>
+          <span className="absolute px-2 bg-white text-sm text-gray-500">Or</span>
+        </div>
+        <div className="space-y-2">
+          <button
+            type="button"
+            className="w-full px-4 py-2 text-white bg-blue-800 rounded-md flex items-center justify-center space-x-2"
+          >
+            <FaFacebook />
+            <span>Login with Facebook</span>
+          </button>
+          <button
+            type="button"
+            className="w-full px-4 py-2 text-black bg-gray-100 border border-gray-300 rounded-md flex items-center justify-center space-x-2"
+          >
+            <FaGoogle />
+            <span>Login with Google</span>
+          </button>
+        </div>
       </div>
-    </div>
+
   );
 };
 

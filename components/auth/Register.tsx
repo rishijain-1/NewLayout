@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
@@ -53,43 +53,42 @@ const Register: React.FC = () => {
         const error = await res.json();
         setErrorMessage(error.message || "An unknown error occurred");
       }
-    } catch{
+    } catch {
       setErrorMessage("An error occurred during registration.");
     }
   };
 
   return (
-    <div className="flex items-center justify-center  bg-gray-800  sm:p-2 lg:p-4">
-      <div className="w-full max-w-md bg-gray-800  p-6 sm:p-8 rounded-lg ">
-        <h2 className="text-2xl font-bold text-gray-100 text-center mb-6">Register</h2>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
+        <h2 className="text-2xl font-bold text-center">Register</h2>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           
           {/* Name Field */}
-          <div>
-            <label htmlFor="name" className="flex items-center text-gray-100 text-sm font-medium mb-1">
+          <div className="relative">
+            <label htmlFor="name" className="flex items-center text-sm font-medium mb-1">
               <FaUser className="text-gray-600 mr-2" />
               Name
             </label>
             <input
               type="text"
               id="name"
-              placeholder="Name"
+              placeholder="Enter your name"
               {...register("name", { required: "Name is required" })}
-              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full p-2 border border-gray-300 rounded-md outline-none focus:ring-2 focus:ring-indigo-500"
             />
             {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
           </div>
 
           {/* Email Field */}
-          <div>
-            <label htmlFor="email" className="flex items-center text-gray-100 text-sm font-medium mb-1">
+          <div className="relative">
+            <label htmlFor="email" className="flex items-center  text-sm font-medium mb-1">
               <FaEnvelope className="text-gray-600 mr-2" />
               Email
             </label>
             <input
               type="email"
               id="email"
-              placeholder="Email"
+              placeholder="Enter your email"
               {...register("email", {
                 required: "Email is required",
                 pattern: {
@@ -97,50 +96,56 @@ const Register: React.FC = () => {
                   message: "Invalid email address",
                 },
               })}
-              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500"
             />
             {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
           </div>
 
           {/* Designation Field */}
-          <div>
-            <label htmlFor="designation" className="flex items-center text-gray-100 text-sm font-medium mb-1">
+          <div className="relative">
+            <label htmlFor="designation" className="flex items-center  text-sm font-medium mb-1">
               <FaBriefcase className="text-gray-600 mr-2" />
               Designation
             </label>
             <input
               type="text"
               id="designation"
-              placeholder="Designation"
+              placeholder="Enter your designation"
               {...register("designation", { required: "Designation is required" })}
-              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500"
             />
             {errors.designation && <p className="text-red-500 text-sm">{errors.designation.message}</p>}
           </div>
 
           {/* Password Field */}
           <div className="relative">
-            <label htmlFor="password" className="flex items-center text-gray-100 text-sm font-medium mb-1">
+            <label htmlFor="password" className="flex items-center text-sm font-medium mb-1">
               <FaLock className="text-gray-600 mr-2" />
               Password
             </label>
             <input
               type={showPassword ? "text" : "password"}
               id="password"
-              placeholder="Password"
+              placeholder="Enter your password"
               {...register("password", {
                 required: "Password is required",
                 minLength: {
-                  value: 6,
-                  message: "Password must be at least 6 characters",
+                  value: 8,
+                  message: "Password must be at least 8 characters",
+                },
+                pattern: {
+                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).+$/,
+                  message:
+                    "Password must include at least 1 uppercase, 1 lowercase, 1 number, and 1 special character",
                 },
               })}
-              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 pr-10"
+              className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 pr-10"
             />
             <button
               type="button"
+              aria-label={showPassword ? "Hide password" : "Show password"}
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-4 sm:mt-4 mt-2 top-1/2 transform -translate-y-1/2 text-gray-600"
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-600"
             >
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </button>
@@ -149,24 +154,25 @@ const Register: React.FC = () => {
 
           {/* Confirm Password Field */}
           <div className="relative">
-            <label htmlFor="password_confirmation" className="flex items-center text-gray-100 text-sm font-medium mb-1">
+            <label htmlFor="password_confirmation" className="flex items-center text-sm font-medium mb-1">
               <FaLock className="text-gray-600 mr-2" />
               Confirm Password
             </label>
             <input
               type={showConfirmPassword ? "text" : "password"}
               id="password_confirmation"
-              placeholder="Confirm Password"
+              placeholder="Confirm your password"
               {...register("password_confirmation", {
                 validate: (value: string) => value === getValues("password") || "Passwords do not match",
                 required: "Please confirm your password",
               })}
-              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 pr-10"
+              className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 pr-10"
             />
             <button
               type="button"
+              aria-label={showConfirmPassword ? "Hide confirm password" : "Show confirm password"}
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              className="absolute right-4 sm:mt-2 mt-2 top-1/2 transform -translate-y-1/2 text-gray-600"
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-600"
             >
               {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
             </button>
@@ -179,25 +185,23 @@ const Register: React.FC = () => {
           {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
 
           {/* Submit Button */}
-          <div>
+          <div className="relative">
             <button
               type="submit"
-              className="w-full py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="w-full py-3 text-white bg-indigo-600  rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Register
             </button>
           </div>
 
           {/* Link to Login */}
-          <div className="text-center">
-            <p className="text-gray-100 text-sm">
+          
+            <div className="text-center text-gray-500 text-sm">
               Already have an account? <a href="/login" className="text-indigo-600 hover:underline">Login</a>
-            </p>
-          </div>
+            </div>
+         
         </form>
       </div>
-    </div>
-
   );
 };
 
