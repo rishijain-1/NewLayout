@@ -25,6 +25,7 @@ const Login = () => {
     });
 
     if (result?.error) {
+      console.log(result.error)
       setError(result.error);
     } else if (result?.ok) {
       router.push("/main");
