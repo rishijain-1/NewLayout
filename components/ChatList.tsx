@@ -24,7 +24,7 @@ const ChatList: React.FC = () => {
 
   // Filter chatList based on the search query
   const filteredChatList = chatList.filter((chatUser) => 
-    chatUser.name.toLowerCase().includes(query.toLowerCase())
+    chatUser.name.toLowerCase()
   );
 
     function handleStartChat(chatUser: ChatUser){

@@ -46,7 +46,9 @@ const NewChat: React.FC = () => {
 
       setResults(response.data.user);
     } catch (error ) {
-        setError('Faild to facth User')
+       if(error){
+        setError('failed t fetch user')
+       }
     } finally {
       setLoading(false);
     }

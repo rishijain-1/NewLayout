@@ -52,7 +52,6 @@ async function fetchProfile(token: string): Promise<Profile | null> {
 export default function RightSidebar({ isVisible }: RightSidebarProps) {
   const route= useRouter();
   const {setLoginUser}=useChat()
-  const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -87,7 +86,6 @@ export default function RightSidebar({ isVisible }: RightSidebarProps) {
       }
 
       setLoginUser(userProfile);  
-      setProfile(userProfile);
       setLoading(false);
     };
 
@@ -97,6 +95,9 @@ export default function RightSidebar({ isVisible }: RightSidebarProps) {
 
 
   if (!isVisible) return null;
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <aside className="lg:w-72 w-full p-4 bg-gray-100 text-black border-l border-gray-300 h-screen overflow-y-auto">
