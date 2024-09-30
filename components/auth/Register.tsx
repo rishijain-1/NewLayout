@@ -3,7 +3,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { FaUser, FaEnvelope, FaLock, FaBriefcase, FaEye, FaEyeSlash, FaLanguage } from "react-icons/fa"; // Updated icons
+import { FaUser, FaEnvelope, FaLock, FaBriefcase, FaEye, FaEyeSlash } from "react-icons/fa"; // Updated icons
 
 interface FormData {
   name: string;
