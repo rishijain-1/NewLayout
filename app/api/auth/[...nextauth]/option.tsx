@@ -33,9 +33,9 @@ export const authOptions: NextAuthOptions = {
           } else {
             throw new Error(data.message || "Login failed");
           }
-        } catch{
-         
-          return null;
+        } catch (error) {
+          console.error(error);
+          throw new Error((error as Error).message || "An unexpected error occurred");
         }
       },
     }),
