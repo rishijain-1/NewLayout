@@ -1,6 +1,7 @@
 import MainComponent from "@/components/main/MainComponent";
 import Sidebar from "@/components/main/Sidebar";
 import RightSideComponent from "@/components/main/RightSideComponent";
+import ChatBox from "@/components/ChatBox";
 
 export default function Main() {
   return (
@@ -17,7 +18,7 @@ export default function Main() {
 
       {/* Main Content */}
       <main className="flex-grow overflow-y-auto w-full lg:w-3/6 bg-white"> 
-        <MainComponent />
+        <ChatBox />
       </main>
 
       {/* Right Sidebar - Visible on mobile and larger screens */}

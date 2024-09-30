@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Provider from "@/context/sessionProvider";
+import { ChatProvider } from "@/context/ChatContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,7 +32,9 @@ export default function RootLayout({
       >
           <div className="flex-grow bg-white">
             <Provider>
-              {children}
+              <ChatProvider>
+                {children}
+              </ChatProvider>
             </Provider>
           </div>
       </body>
