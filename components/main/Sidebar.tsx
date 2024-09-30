@@ -41,7 +41,7 @@ const Sidebar = () => {
   return (
     <>
       {/* Mobile Menu Button */}
-      <div className="md:hidden h-fit p-2 z-20 border-x-2 shadow-2xl relative">
+      <div className="lg:hidden h-fit p-2 z-20 border-x-2 shadow-2xl relative">
         <button
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle sidebar"
@@ -53,9 +53,9 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`fixed z-20 h-full w-64 bg-white shadow-xl p-6 transform ${
+        className={`fixed z-20 h-full  bg-white shadow-xl p-2 transform ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
-        } transition-transform duration-300 md:relative md:translate-x-0`}
+        } transition-transform duration-300 lg:relative lg:translate-x-0`}
         ref={sidebarRef}
       >
         <div className="flex flex-col max-h-full">
