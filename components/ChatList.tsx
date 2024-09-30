@@ -3,8 +3,7 @@ import { useState, useEffect } from 'react';
 import { useChat } from '@/context/ChatContext';
 import { ChatUser } from '@/context/ChatContext';
 
-const ChatList: React.FC = () => {
-  const [query, setQuery] = useState(''); 
+const ChatList: React.FC = () => { 
   const { setUser } = useChat();
   const [chatList, setChatList] = useState<ChatUser[]>([]);
   const { loginUser } = useChat();
@@ -21,9 +20,7 @@ const ChatList: React.FC = () => {
   }, [loginUser]);
 
 
-  const filteredChatList = chatList.filter((chatUser) =>
-    chatUser.name.toLowerCase().includes(query.toLowerCase()) 
-  );
+  
 
   function handleStartChat(chatUser: ChatUser) {
     setUser(chatUser);
@@ -31,19 +28,11 @@ const ChatList: React.FC = () => {
 
   return (
     <>
-      {/* Search Input */}
-      <input
-        type="text"
-        placeholder="Search chats"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)} 
-        className="p-2 mb-4 border rounded"
-      />
 
       {/* Display User Chat List */}
       <div className="mt-6">
-        {filteredChatList.length > 0 ? (
-          filteredChatList.map((chatUser) => (
+        {chatList.length > 0 ? (
+          chatList.map((chatUser) => (
             <div key={chatUser.id} className="flex justify-between items-center"> 
               <div className="p-2 text-black border-b">
                 {chatUser.name}
