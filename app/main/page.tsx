@@ -1,4 +1,3 @@
-import MainComponent from "@/components/main/MainComponent";
 import Sidebar from "@/components/main/Sidebar";
 import RightSideComponent from "@/components/main/RightSideComponent";
 import ChatBox from "@/components/ChatBox";
