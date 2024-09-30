@@ -25,8 +25,9 @@ const Login = () => {
     });
 
     if (result?.error) {
-      console.log(result.error)
-      setError(result.error);
+      if(result.error){
+        setError('please check email and password');
+      }
     } else if (result?.ok) {
       router.push("/main");
     }
