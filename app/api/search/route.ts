@@ -28,7 +28,7 @@ export async function GET(req: NextRequest) {
   } catch (error) {
     return NextResponse.json(
 
-      { message: 'Failed to search user' },
+      { message: 'Failed to search user',error:error },
       { status: 500 }
     );
   }

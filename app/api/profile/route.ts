@@ -35,7 +35,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(response.data);
   } catch (error: Error | unknown) {
     return NextResponse.json(
-      { message: ' Profle Internal server error' },
+      { message: ' Profle Internal server error' ,error:error},
       { status: 500 }
     );
   }
