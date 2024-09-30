@@ -23,18 +23,17 @@ export async function GET(req: NextRequest) {
     }
 
     const accessToken = authHeader.split(' ')[1];
+    console.log(URL)
 
-    const response = await axios.get(`${URL}/user/logout`, {
+    const response = await axios.get(`${URL}/user/profile`, {
       headers: {
         Accept: 'application/json',
         Authorization: `Bearer ${accessToken}`,
       },
     });
-
+    
     return NextResponse.json(response.data);
   } catch (error: Error | unknown) {
-    console.error('Error occurred:', error); // Log the error for debugging
-
     return NextResponse.json(
       { message: ' Profle Internal server error' },
       { status: 500 }
