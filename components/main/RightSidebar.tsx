@@ -20,11 +20,8 @@ interface Profile {
   designation?: string;
   email: string;
   id: string;
+  profile_image: string;
 }
-
-
-
-
 
 async function fetchProfile(token: string): Promise<Profile | null> {
   try {

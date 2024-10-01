@@ -11,6 +11,7 @@ export interface LoginUser {
   designation?: string;
   email: string;
   id: string;
+  profile_image:string;
 }
 export interface ChatContextProps {
   user: ChatUser | null;
