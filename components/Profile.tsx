@@ -2,18 +2,18 @@ import { useState, useEffect } from 'react';
 import { useChat } from '@/context/ChatContext';
 import { Badge, Calendar, CheckCircle, Tag, User } from 'lucide-react';
 import { getCurrentUser } from '@/app/api/auth/session';
+import Image from 'next/image'; 
 
 const Profile = () => {
   const { loginUser } = useChat();
-  const [profilePic, setProfilePic] = useState<string | null>(null); 
-  const [selectedFile, setSelectedFile] = useState<File | null>(null); 
+  const [profilePic, setProfilePic] = useState<string | null>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   useEffect(() => {
-
     if (loginUser?.profile_image) {
-      setProfilePic(loginUser.profile_image); 
+      setProfilePic(loginUser.profile_image);
     } else {
-      setProfilePic('/default-profile.png'); 
+      setProfilePic('/default-profile.png');
     }
   }, [loginUser]);
 
@@ -25,9 +25,9 @@ const Profile = () => {
 
       const reader = new FileReader();
       reader.onload = () => {
-        setProfilePic(reader.result as string); // Set preview of the new image
+        setProfilePic(reader.result as string); 
       };
-      reader.readAsDataURL(file); // Read the selected image file
+      reader.readAsDataURL(file); 
     }
   };
 
@@ -35,55 +35,54 @@ const Profile = () => {
     if (selectedFile) {
       const formData = new FormData();
       formData.append('profile_image', selectedFile);
-  
-      const token = await getCurrentUser().then(session => session?.accessToken);
-      
+
+      const token = await getCurrentUser().then((session) => session?.accessToken);
+
       const response = await fetch('/api/profileImage', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
         body: formData,
       });
-  
+
       if (response.ok) {
-        const data = await response.json();
-        alert('Profile picture uploaded successfully!');
+        const responseData = await response.json();
+        alert(responseData.message); 
       } else {
-        console.log('Profile picture upload failed!');
+        console.log(response.body);
       }
     }
   };
 
-  // Trigger file input when the profile picture is clicked
   const handleProfileClick = () => {
     const fileInput = document.getElementById('profile-input');
     if (fileInput) {
       fileInput.click();
     }
   };
-
-  // Upload image when the user clicks the upload button
   const handleFileUpload = async () => {
     if (selectedFile) {
-       await postImage();
+      await postImage();
     }
   };
 
   return (
     <div className="mb-4 mt-3">
       <h2 className="text-lg font-bold mb-2">Main info</h2>
-      
+
       {/* Profile Picture Section */}
       <div className="flex flex-col items-center mb-4">
         <div
           className="w-24 h-24 rounded-full overflow-hidden border border-gray-300 cursor-pointer"
           onClick={handleProfileClick}
         >
-          <img
-            src={profilePic ?? '/default-profile.png'} // Display profilePic or default image
+          <Image
+            src={profilePic ?? '/default-profile.png'} 
             alt="Profile"
-            className="w-full h-full object-cover"
+            width={96} 
+            height={96}
+            className="object-cover w-full h-full"
           />
         </div>
 
@@ -99,7 +98,7 @@ const Profile = () => {
 
         {/* Upload Button */}
         {selectedFile && (
-          <button 
+          <button
             onClick={handleFileUpload}
             className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
           >
