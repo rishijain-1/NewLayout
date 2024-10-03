@@ -1,28 +1,26 @@
-"use client";
-import { useState, useEffect } from "react";
-import { useChat } from "@/context/ChatContext";
-import { ChatUser } from "@/context/ChatContext";
+'use client'
+import { useState, useEffect } from 'react'
+import { useChat } from '@/context/ChatContext'
+import { ChatUser } from '@/context/ChatContext'
 
 const ChatList: React.FC = () => {
-  const { setUser } = useChat();
-  const [chatList, setChatList] = useState<ChatUser[]>([]);
-  const { loginUser } = useChat();
+  const { setUser } = useChat()
+  const [chatList, setChatList] = useState<ChatUser[]>([])
+  const { loginUser } = useChat()
 
   useEffect(() => {
     if (loginUser) {
-      const storedUsers = JSON.parse(localStorage.getItem("users") || "[]");
-      const currentUser = storedUsers.find(
-        (user: { id: string }) => user.id === loginUser.id
-      );
+      const storedUsers = JSON.parse(localStorage.getItem('users') || '[]')
+      const currentUser = storedUsers.find((user: { id: string }) => user.id === loginUser.id)
 
       if (currentUser && currentUser.chatList) {
-        setChatList(currentUser.chatList);
+        setChatList(currentUser.chatList)
       }
     }
-  }, [loginUser]);
+  }, [loginUser])
 
   function handleStartChat(chatUser: ChatUser) {
-    setUser(chatUser);
+    setUser(chatUser)
   }
 
   return (
@@ -31,12 +29,9 @@ const ChatList: React.FC = () => {
       <div className="mt-6 ">
         {chatList.length > 0 ? (
           chatList
-            .filter((chatUser) => chatUser.name && chatUser.name.trim() !== "") // Check if name exists and is not blank
+            .filter((chatUser) => chatUser.name && chatUser.name.trim() !== '') // Check if name exists and is not blank
             .map((chatUser) => (
-              <div
-                key={chatUser.id}
-                className="flex justify-between items-center border-b-2"
-              >
+              <div key={chatUser.id} className="flex justify-between items-center border-b-2">
                 <div className="p-2 text-black ">{chatUser.name}</div>
                 <button
                   onClick={() => handleStartChat(chatUser)}
@@ -51,7 +46,7 @@ const ChatList: React.FC = () => {
         )}
       </div>
     </>
-  );
-};
+  )
+}
 
-export default ChatList;
+export default ChatList
