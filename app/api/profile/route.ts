@@ -1,14 +1,14 @@
-import { NextRequest, NextResponse } from 'next/server';
-import axios from 'axios';
+import { NextRequest, NextResponse } from "next/server";
+import axios from "axios";
 
-export const dynamic = 'force-dynamic'; 
+export const dynamic = "force-dynamic";
 export async function GET(req: NextRequest) {
   try {
-    const authHeader = req.headers.get('Authorization');
+    const authHeader = req.headers.get("Authorization");
 
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
       return NextResponse.json(
-        { message: 'Authorization token missing or invalid' },
+        { message: "Authorization token missing or invalid" },
         { status: 401 }
       );
     }
@@ -17,25 +17,24 @@ export async function GET(req: NextRequest) {
 
     if (!URL) {
       return NextResponse.json(
-        { message: 'API URL not configured' },
+        { message: "API URL not configured" },
         { status: 500 }
       );
     }
 
-    const accessToken = authHeader.split(' ')[1];
-    console.log(URL)
+    const accessToken = authHeader.split(" ")[1];
 
     const response = await axios.get(`${URL}/user/profile`, {
       headers: {
-        Accept: 'application/json',
+        Accept: "application/json",
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    
+
     return NextResponse.json(response.data);
   } catch (error: Error | unknown) {
     return NextResponse.json(
-      { message: ' Profle Internal server error' ,error:error},
+      { message: " Profle Internal server error", error: error },
       { status: 500 }
     );
   }
