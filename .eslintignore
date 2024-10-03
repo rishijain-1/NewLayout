@@ -1,0 +1,21 @@
+# Ignore node_modules
+node_modules/
+
+# Ignore build output
+/.next
+/build
+/out
+
+# Ignore coverage reports
+/coverage
+
+# Ignore specific files
+*.min.js
+*.lock
+
+# Ignore configuration files
+*.config.js
+*.config.mjs
+
+# Ignore other files
+.DS_Store

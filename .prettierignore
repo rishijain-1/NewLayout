@@ -1,0 +1,23 @@
+# Ignore artifacts
+/build
+/.next
+/out
+
+# Ignore node_modules
+/node_modules
+
+# Ignore coverage reports
+/coverage
+
+# Ignore specific files
+*.min.js
+*.lock
+*.json
+
+# Ignore configuration files
+*.config.js
+*.config.mjs
+
+# Ignore other files
+.DS_Store
+
