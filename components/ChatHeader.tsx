@@ -1,14 +1,14 @@
-'use client';
-import React from 'react';
-import { FaUserCircle, FaChevronRight } from 'react-icons/fa';
-import { useChat } from '@/context/ChatContext'; 
+"use client";
+import React from "react";
+import { FaUserCircle, FaChevronRight } from "react-icons/fa";
+import { useChat } from "@/context/ChatContext";
 
 interface ChatHeaderProps {
   name: string;
 }
 
 const ChatHeader: React.FC<ChatHeaderProps> = ({ name }) => {
-  const { removeUser } = useChat(); 
+  const { removeUser } = useChat();
 
   const handleNavigate = () => {
     removeUser();
@@ -23,9 +23,9 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({ name }) => {
       </div>
 
       {/* Right Side: Right Arrow Icon */}
-      <FaChevronRight 
-        className="text-xl cursor-pointer hover:text-gray-200" 
-        onClick={handleNavigate} 
+      <FaChevronRight
+        className="text-xl cursor-pointer hover:text-gray-200"
+        onClick={handleNavigate}
       />
     </div>
   );
