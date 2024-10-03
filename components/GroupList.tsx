@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useChat } from "@/context/ChatContext";
 import { ChatUser } from "@/context/ChatContext";
 
-const ChatList: React.FC = () => {
+const GroupList: React.FC = () => {
   const { setUser } = useChat();
   const [chatList, setChatList] = useState<ChatUser[]>([]);
   const { loginUser } = useChat();
@@ -15,31 +15,31 @@ const ChatList: React.FC = () => {
         (user: { id: string }) => user.id === loginUser.id
       );
 
-      if (currentUser && currentUser.chatList) {
-        setChatList(currentUser.chatList);
+      if (currentUser && currentUser.groupList) {
+        setChatList(currentUser.groupList);
       }
     }
   }, [loginUser]);
 
-  function handleStartChat(chatUser: ChatUser) {
-    setUser(chatUser);
+  function handleStartChat(group: ChatUser) {
+    setUser(group);
   }
 
   return (
     <>
       {/* Display User Chat List */}
-      <div className="mt-6 ">
+      <div className="mt-2 w-full">
         {chatList.length > 0 ? (
           chatList
-            .filter((chatUser) => chatUser.name && chatUser.name.trim() !== "") // Check if name exists and is not blank
-            .map((chatUser) => (
+            .filter((group) => group.name && group.name.trim() !== "") 
+            .map((group) => (
               <div
-                key={chatUser.id}
-                className="flex justify-between items-center border-b-2"
+                key={group.id}
+                className="flex justify-between items-center"
               >
-                <div className="p-2 text-black ">{chatUser.name}</div>
+                <div className="p-2 text-black border-b">{group.name}</div>
                 <button
-                  onClick={() => handleStartChat(chatUser)}
+                  onClick={() => handleStartChat(group)}
                   className="bg-black text-white px-2 py-1 rounded-md hover:bg-gray-600 hover:text-black"
                 >
                   Start Chat
@@ -54,4 +54,4 @@ const ChatList: React.FC = () => {
   );
 };
 
-export default ChatList;
+export default GroupList;
