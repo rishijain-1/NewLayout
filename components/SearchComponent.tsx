@@ -18,7 +18,6 @@ const NewChat: React.FC = () => {
 
   // User search function
   const searchUsers = async (searchQuery: string): Promise<void> => {
-    let name
     if (searchQuery.length < 2 || searchQuery === lastQueryRef.current) {
       setResults([])
       return
