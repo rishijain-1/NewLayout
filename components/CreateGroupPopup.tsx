@@ -1,92 +1,93 @@
-import { useState } from 'react'
+import { useState } from "react";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogFooter,
-  DialogDescription
-} from '@/components/ui/dialog'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { getCurrentUser } from '@/app/api/auth/session'
-import { useChat } from '@/context/ChatContext'
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { getCurrentUser } from "@/app/api/auth/session";
+import { useChat } from "@/context/ChatContext";
 
 const CreateGroupPopup = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
-  const [groupName, setGroupName] = useState<string>('')
-  const [error, setError] = useState<string | null>(null)
-  const [loading, setLoading] = useState<boolean>(false)
+  const [groupName, setGroupName] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const { loginUser } = useChat()
+  const { loginUser } = useChat();
 
   const handleCreateGroup = async () => {
-    setLoading(true)
-    setError(null)
+    setLoading(true);
+    setError(null);
 
     if (!groupName.trim()) {
-      setError('Group name is required')
-      setLoading(false)
-      return
+      setError("Group name is required");
+      setLoading(false);
+      return;
     }
 
     try {
-      const session = await getCurrentUser()
-      const token = session?.accessToken
+      const session = await getCurrentUser();
+      const token = session?.accessToken;
       if (!token) {
-        setError('Authorization token is missing')
-        setLoading(false)
-        return
+        setError("Authorization token is missing");
+        setLoading(false);
+        return;
       }
 
-      const response = await fetch('/api/createGroup', {
-        method: 'POST',
+      const response = await fetch("/api/createGroup", {
+        method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ group_name: groupName })
-      })
+        body: JSON.stringify({ group_name: groupName }),
+      });
 
-      const data = await response.json()
+      const data = await response.json();
       if (!response.ok) {
-        setError(data.message || 'Failed to create group')
+        setError(data.message || "Failed to create group");
       } else {
-        alert('Group created successfully!')
+        alert("Group created successfully!");
         const newGroup = {
           id: data.data.data.id,
           name: data.data.data.name,
           created_by: data.data.data.created_by,
           created_at: data.data.data.created_at,
-          updated_at: data.data.data.updated_at
-        }
+          updated_at: data.data.data.updated_at,
+        };
 
-        const storedUsers = JSON.parse(localStorage.getItem('users') || '[]')
-        const currentUser = storedUsers.find((user: { id: string }) => user.id === loginUser?.id)
+        const storedUsers = JSON.parse(localStorage.getItem("users") || "[]");
+        const currentUser = storedUsers.find((user: { id: string }) => user.id === loginUser?.id);
 
         if (currentUser) {
           // Initialize groupList if it doesn't exist
           if (!currentUser.groupList) {
-            currentUser.groupList = [] // Create a new groupList
+            currentUser.groupList = []; // Create a new groupList
           }
 
           // Add new group to the groupList
-          currentUser.groupList.push(newGroup)
+          currentUser.groupList.push(newGroup);
 
           const updatedUsers = storedUsers.map((user: { id: string }) =>
             user.id === loginUser?.id ? currentUser : user
-          )
+          );
 
-          localStorage.setItem('users', JSON.stringify(updatedUsers))
+          localStorage.setItem("users", JSON.stringify(updatedUsers));
         }
 
-        onClose()
+        onClose();
       }
     } catch (error) {
-      setError('An error occurred while creating the group')
+      console.log(error);
+      setError("An error occurred while creating the group");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -112,12 +113,12 @@ const CreateGroupPopup = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
             Cancel
           </Button>
           <Button onClick={handleCreateGroup} disabled={loading}>
-            {loading ? 'Creating...' : 'Create'}
+            {loading ? "Creating..." : "Create"}
           </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
-export default CreateGroupPopup
+export default CreateGroupPopup;

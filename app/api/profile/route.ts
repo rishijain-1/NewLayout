@@ -7,19 +7,13 @@ export async function GET(req: NextRequest) {
     const authHeader = req.headers.get("Authorization");
 
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
-      return NextResponse.json(
-        { message: "Authorization token missing or invalid" },
-        { status: 401 }
-      );
+      return NextResponse.json({ message: "Authorization token missing or invalid" }, { status: 401 });
     }
 
     const URL = process.env.API_URL;
 
     if (!URL) {
-      return NextResponse.json(
-        { message: "API URL not configured" },
-        { status: 500 }
-      );
+      return NextResponse.json({ message: "API URL not configured" }, { status: 500 });
     }
 
     const accessToken = authHeader.split(" ")[1];
@@ -33,9 +27,6 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(response.data);
   } catch (error: Error | unknown) {
-    return NextResponse.json(
-      { message: " Profle Internal server error", error: error },
-      { status: 500 }
-    );
+    return NextResponse.json({ message: " Profle Internal server error", error: error }, { status: 500 });
   }
 }

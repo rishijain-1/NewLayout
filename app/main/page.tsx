@@ -6,7 +6,7 @@ export default function Main() {
   return (
     <div className="flex flex-col lg:flex-row h-screen">
       {/* Left Sidebar - Visible on larger screens */}
-      <div className="hidden lg:block w-1/5 h-full"> 
+      <div className="hidden lg:block w-1/5 h-full">
         <Sidebar />
       </div>
 
@@ -16,7 +16,7 @@ export default function Main() {
       </div>
 
       {/* Main Content */}
-      <main className="flex-grow overflow-y-auto w-full lg:w-3/6 bg-white"> 
+      <main className="flex-grow overflow-y-auto w-full lg:w-3/6 bg-white">
         <ChatBox />
       </main>
 

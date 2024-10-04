@@ -27,16 +27,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-          <div className="flex-grow bg-white">
-            <Provider>
-              <ChatProvider>
-                {children}
-              </ChatProvider>
-            </Provider>
-          </div>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <div className="flex-grow bg-white">
+          <Provider>
+            <ChatProvider>{children}</ChatProvider>
+          </Provider>
+        </div>
       </body>
     </html>
   );

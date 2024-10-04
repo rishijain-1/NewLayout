@@ -1,9 +1,5 @@
 // Icons from lucide-react
-import {
-  Menubar,
-  MenubarMenu,
-  MenubarTrigger,
-} from "@/components/ui/menubar";
+import { Menubar, MenubarMenu, MenubarTrigger } from "@/components/ui/menubar";
 import { getCurrentUser } from "@/app/api/auth/session";
 import { useRouter } from "next/navigation";
 import { useChat } from "@/context/ChatContext";
@@ -62,7 +58,9 @@ export default function RightSidebar({ isVisible }: RightSidebarProps) {
 
       if (!token) {
         alert("Please login");
+
         router.push("/login");
+
         return;
       }
 
@@ -76,9 +74,7 @@ export default function RightSidebar({ isVisible }: RightSidebarProps) {
 
       const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
 
-      const userExists = existingUsers.some(
-        (user: { id: string }) => user.id === userProfile.id
-      );
+      const userExists = existingUsers.some((user: { id: string }) => user.id === userProfile.id);
 
       if (!userExists) {
         const updatedUsers = [...existingUsers, userProfile];
@@ -110,7 +106,12 @@ export default function RightSidebar({ isVisible }: RightSidebarProps) {
       {/* Menubar */}
       <Menubar className="mb-4">
         <MenubarMenu>
-          <MenubarTrigger className="text-black">Info</MenubarTrigger>
+          <MenubarTrigger
+            className="
+          text-black"
+          >
+            Info
+          </MenubarTrigger>
         </MenubarMenu>
         <MenubarMenu>
           <MenubarTrigger className="text-black">Pins</MenubarTrigger>
@@ -141,7 +142,7 @@ export default function RightSidebar({ isVisible }: RightSidebarProps) {
         <SearchComponent />
         <div className=" my-3 ">
           <h2 className="text-lg font-bold">Group List</h2>
-          <GroupList/>
+          <GroupList />
         </div>
       </div>
 

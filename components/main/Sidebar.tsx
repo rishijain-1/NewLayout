@@ -1,7 +1,19 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useRef } from 'react';
-import { FaBars, FaTimes, FaInbox, FaPaperPlane, FaStar, FaCpanel, FaUserFriends, FaUser, FaFileAlt, FaRegCalendarAlt, FaChalkboard } from 'react-icons/fa';
+import { useState, useEffect, useRef } from "react";
+import {
+  FaBars,
+  FaTimes,
+  FaInbox,
+  FaPaperPlane,
+  FaStar,
+  FaCpanel,
+  FaUserFriends,
+  FaUser,
+  FaFileAlt,
+  FaRegCalendarAlt,
+  FaChalkboard,
+} from "react-icons/fa";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,7 +35,6 @@ const Sidebar = () => {
   };
 
   // Close sidebar when clicking outside the sidebar
-  
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -31,10 +42,10 @@ const Sidebar = () => {
         setIsOpen(false);
       }
     };
-  
-    document.addEventListener('mousedown', handleClickOutside);
+
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isOpen]);
 
@@ -42,11 +53,7 @@ const Sidebar = () => {
     <>
       {/* Mobile Menu Button */}
       <div className="lg:hidden h-fit p-2 z-20 border-x-2 shadow-2xl relative">
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle sidebar"
-          className="text-gray-800"
-        >
+        <button onClick={() => setIsOpen(!isOpen)} aria-label="Toggle sidebar" className="text-gray-800">
           {isOpen ? <FaTimes className="h-8 w-8" /> : <FaBars className="h-8 w-8" />}
         </button>
       </div>
@@ -54,7 +61,7 @@ const Sidebar = () => {
       {/* Sidebar */}
       <div
         className={`fixed z-20 h-full  bg-white shadow-xl p-2 transform ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
+          isOpen ? "translate-x-0" : "-translate-x-full"
         } transition-transform duration-300 lg:relative lg:translate-x-0`}
         ref={sidebarRef}
       >
@@ -66,7 +73,7 @@ const Sidebar = () => {
 
           {/* Sections */}
           <nav className="overflow-y-auto max-h-full flex-grow">
-            <ul className='px-4'>
+            <ul className="px-4">
               <li className="text-sm font-medium text-gray-500 cursor-pointer hover:bg-gray-100 p-1 rounded-md transition-colors">
                 <FaFileAlt className="inline mr-2" /> Drafts
               </li>
@@ -97,7 +104,7 @@ const Sidebar = () => {
             <div className="mt-3">
               <h3
                 className="font-semibold text-gray-800 cursor-pointer flex items-center"
-                onClick={() => toggleSection('favorites')}
+                onClick={() => toggleSection("favorites")}
               >
                 <FaStar className="mr-2 text-gray-700" /> Favorites
               </h3>
@@ -129,7 +136,7 @@ const Sidebar = () => {
             <div className="mt-3">
               <h3
                 className="font-semibold text-gray-800 cursor-pointer flex items-center"
-                onClick={() => toggleSection('channels')}
+                onClick={() => toggleSection("channels")}
               >
                 <FaCpanel className="mr-2" /> Channels
               </h3>
@@ -165,9 +172,7 @@ const Sidebar = () => {
                       <li className="text-sm font-medium text-gray-500 cursor-pointer hover:bg-gray-100 p-1 rounded-md transition-colors">
                         Design
                       </li>
-                      <li className="text-sm font-medium text-gray-500 bg-gray-100 p-1 rounded-md">
-                        UI-kit design
-                      </li>
+                      <li className="text-sm font-medium text-gray-500 bg-gray-100 p-1 rounded-md">UI-kit design</li>
                     </ul>
                   </li>
                   <li className="text-sm font-medium text-gray-500 cursor-pointer hover:bg-gray-100 p-1 rounded-md transition-colors">
@@ -181,7 +186,7 @@ const Sidebar = () => {
             <div className="mt-3">
               <h3
                 className="font-semibold text-gray-800 cursor-pointer flex items-center"
-                onClick={() => toggleSection('others')}
+                onClick={() => toggleSection("others")}
               >
                 <FaRegCalendarAlt className="mr-2" /> Others
               </h3>

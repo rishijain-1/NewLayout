@@ -58,9 +58,7 @@ const Login = () => {
             })}
             className="w-full p-2 border border-gray-300 rounded-md outline-none"
           />
-          {errors.email && (
-            <p className="text-red-500 text-sm">{errors.email.message}</p>
-          )}
+          {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
         </div>
         <div className="relative">
           <label htmlFor="password" className="text-sm font-medium mb-1">
@@ -88,16 +86,11 @@ const Login = () => {
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </button>
           </div>
-          {errors.password && (
-            <p className="text-red-500 text-sm">{errors.password.message}</p>
-          )}
+          {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
         </div>
         {error && <p className="text-red-500 text-sm">{error}</p>}
         <div className="flex justify-end">
-          <a
-            href="/forgot-password"
-            className="text-sm text-blue-600 hover:underline"
-          >
+          <a href="/forgot-password" className="text-sm text-blue-600 hover:underline">
             Forgot password?
           </a>
         </div>

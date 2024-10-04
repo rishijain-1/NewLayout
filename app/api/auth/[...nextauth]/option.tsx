@@ -12,9 +12,7 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         try {
-         
           const loginUrl = `${process.env.API_URL}/auth/login`; // Rewritten to ensure it's clean
-        
 
           const res = await fetch(loginUrl, {
             method: "POST",
@@ -44,7 +42,6 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user?.token) {
         token.accessToken = user.token.toString();
-     
       }
       return token;
     },

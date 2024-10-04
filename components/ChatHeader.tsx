@@ -23,10 +23,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({ name }) => {
       </div>
 
       {/* Right Side: Right Arrow Icon */}
-      <FaChevronRight
-        className="text-xl cursor-pointer hover:text-gray-200"
-        onClick={handleNavigate}
-      />
+      <FaChevronRight className="text-xl cursor-pointer hover:text-gray-200" onClick={handleNavigate} />
     </div>
   );
 };

@@ -1,4 +1,3 @@
-
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 
@@ -19,8 +18,11 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(response.data);
   } catch (error) {
-    return NextResponse.json({
-      message: (error as Error).message || "Registration failed",
-    }, { status: 400 });
+    return NextResponse.json(
+      {
+        message: (error as Error).message || "Registration failed",
+      },
+      { status: 400 }
+    );
   }
 }

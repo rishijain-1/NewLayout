@@ -1,71 +1,71 @@
-import { useState, useEffect } from 'react'
-import { useChat } from '@/context/ChatContext'
-import { Badge, Calendar, CheckCircle, Tag, User } from 'lucide-react'
-import { getCurrentUser } from '@/app/api/auth/session'
-import Image from 'next/image'
+import { useState, useEffect } from "react";
+import { useChat } from "@/context/ChatContext";
+import { Badge, Calendar, CheckCircle, Tag, User } from "lucide-react";
+import { getCurrentUser } from "@/app/api/auth/session";
+import Image from "next/image";
 
 const Profile = () => {
-  const { loginUser } = useChat()
-  const [profilePic, setProfilePic] = useState<string | null>(null)
-  const [selectedFile, setSelectedFile] = useState<File | null>(null)
+  const { loginUser } = useChat();
+  const [profilePic, setProfilePic] = useState<string | null>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   useEffect(() => {
     if (loginUser?.profile_image) {
-      setProfilePic(loginUser.profile_image)
+      setProfilePic(loginUser.profile_image);
     } else {
-      setProfilePic('/default-profile.png')
+      setProfilePic("/default-profile.png");
     }
-  }, [loginUser])
+  }, [loginUser]);
 
   // Handle image selection and upload
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
+    const file = e.target.files?.[0];
     if (file) {
-      setSelectedFile(file)
+      setSelectedFile(file);
 
-      const reader = new FileReader()
+      const reader = new FileReader();
       reader.onload = () => {
-        setProfilePic(reader.result as string)
-      }
-      reader.readAsDataURL(file)
+        setProfilePic(reader.result as string);
+      };
+      reader.readAsDataURL(file);
     }
-  }
+  };
 
   const postImage = async () => {
     if (selectedFile) {
-      const formData = new FormData()
-      formData.append('profile_image', selectedFile)
+      const formData = new FormData();
+      formData.append("profile_image", selectedFile);
 
-      const token = await getCurrentUser().then((session) => session?.accessToken)
+      const token = await getCurrentUser().then((session) => session?.accessToken);
 
-      const response = await fetch('/api/profileImage', {
-        method: 'POST',
+      const response = await fetch("/api/profileImage", {
+        method: "POST",
         headers: {
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
-        body: formData
-      })
+        body: formData,
+      });
 
       if (response.ok) {
-        const responseData = await response.json()
-        alert(responseData.message)
+        const responseData = await response.json();
+        alert(responseData.message);
       } else {
-        console.log(response.body)
+        console.log(response.body);
       }
     }
-  }
+  };
 
   const handleProfileClick = () => {
-    const fileInput = document.getElementById('profile-input')
+    const fileInput = document.getElementById("profile-input");
     if (fileInput) {
-      fileInput.click()
+      fileInput.click();
     }
-  }
+  };
   const handleFileUpload = async () => {
     if (selectedFile) {
-      await postImage()
+      await postImage();
     }
-  }
+  };
 
   return (
     <div className="mb-4 mt-3">
@@ -78,7 +78,7 @@ const Profile = () => {
           onClick={handleProfileClick}
         >
           <Image
-            src={profilePic ?? '/default-profile.png'}
+            src={profilePic ?? "/default-profile.png"}
             alt="Profile"
             width={96}
             height={96}
@@ -128,7 +128,7 @@ const Profile = () => {
         <span className="ml-auto text-gray-500">4</span>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;

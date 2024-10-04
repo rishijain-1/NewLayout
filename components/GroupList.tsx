@@ -11,9 +11,7 @@ const GroupList: React.FC = () => {
   useEffect(() => {
     if (loginUser) {
       const storedUsers = JSON.parse(localStorage.getItem("users") || "[]");
-      const currentUser = storedUsers.find(
-        (user: { id: string }) => user.id === loginUser.id
-      );
+      const currentUser = storedUsers.find((user: { id: string }) => user.id === loginUser.id);
 
       if (currentUser && currentUser.groupList) {
         setChatList(currentUser.groupList);
@@ -31,12 +29,9 @@ const GroupList: React.FC = () => {
       <div className="mt-2 w-full">
         {chatList.length > 0 ? (
           chatList
-            .filter((group) => group.name && group.name.trim() !== "") 
+            .filter((group) => group.name && group.name.trim() !== "")
             .map((group) => (
-              <div
-                key={group.id}
-                className="flex justify-between items-center"
-              >
+              <div key={group.id} className="flex justify-between items-center">
                 <div className="p-2 text-black border-b">{group.name}</div>
                 <button
                   onClick={() => handleStartChat(group)}

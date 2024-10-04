@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
@@ -36,7 +36,7 @@ const Register: React.FC = () => {
       password_confirmation: data.password_confirmation,
       designation: data.designation,
     };
-    console.log("client",sendData);
+    console.log("client", sendData);
 
     try {
       const res = await fetch("/api/auth/register", {
@@ -66,7 +66,6 @@ const Register: React.FC = () => {
     <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
       <h2 className="text-2xl font-bold text-center">Register</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        
         {/* Name Field */}
         <div className="relative">
           <label htmlFor="name" className="flex items-center text-sm font-medium mb-1">
@@ -140,8 +139,7 @@ const Register: React.FC = () => {
               },
               pattern: {
                 value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).+$/,
-                message:
-                  "Password must include at least 1 uppercase, 1 lowercase, 1 number, and 1 special character",
+                message: "Password must include at least 1 uppercase, 1 lowercase, 1 number, and 1 special character",
               },
             })}
             className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 pr-10"
@@ -201,7 +199,10 @@ const Register: React.FC = () => {
 
         {/* Link to Login */}
         <div className="text-center text-gray-500 text-sm">
-          Already have an account? <a href="/login" className="text-indigo-600 hover:underline">Login</a>
+          Already have an account?{" "}
+          <a href="/login" className="text-indigo-600 hover:underline">
+            Login
+          </a>
         </div>
       </form>
     </div>

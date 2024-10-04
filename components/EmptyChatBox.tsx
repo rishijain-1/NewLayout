@@ -1,5 +1,5 @@
-import React from 'react';
-import { ChatBubbleLeftIcon } from '@heroicons/react/24/outline';
+import React from "react";
+import { ChatBubbleLeftIcon } from "@heroicons/react/24/outline";
 
 const EmptyChatBox = () => {
   return (

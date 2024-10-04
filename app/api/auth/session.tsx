@@ -13,6 +13,6 @@ export const getCurrentUser = cache(async () => {
     return data || null;
   } catch (error) {
     console.error("Error fetching session:", error);
-    return null; 
+    return null;
   }
 });

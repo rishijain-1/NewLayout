@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Textarea } from "@/components/ui/textarea"; // Import the TextArea component
 import { Button } from "@/components/ui/button";
@@ -7,8 +7,8 @@ import { useState } from "react";
 import { Smile, Send } from "lucide-react"; // Icons from lucide-react
 
 interface Members {
-    name: string;
-    image: string;
+  name: string;
+  image: string;
 }
 
 const members: Members[] = [
@@ -21,7 +21,7 @@ export default function ChatComponent() {
   const [mentionOptions, setMentionOptions] = useState<Members[]>([]);
   const [showMentionBox, setShowMentionBox] = useState(false);
 
-  const handleInputChange = (e: { target: { value: string; }; }) => {
+  const handleInputChange = (e: { target: { value: string } }) => {
     const value = e.target.value;
     setMessage(value);
 
@@ -50,7 +50,8 @@ export default function ChatComponent() {
             </Avatar>
             <div>
               <p>
-                <span className="font-semibold">@Diana T.</span> I have already prepared all styles according to the design phase.
+                <span className="font-semibold">@Diana T.</span> I have already prepared all styles according to the
+                design phase.
               </p>
               <div className="flex space-x-2 mt-1">
                 <span>❤️</span> <span>👍</span>
