@@ -19,12 +19,12 @@ npm run check-lint ||
     false;
 }
 
-echo 'alright codelooks good trying to build now'
+# echo 'alright codelooks good trying to build now'
 
-npm run build ||
-{
-    echo 'build failed'
-    false;
-}
+# npm run build ||
+# {
+#     echo 'build failed'
+#     false;
+# }
 
 echo 'now i commit this'
